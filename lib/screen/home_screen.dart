@@ -6,6 +6,7 @@ import './picture_screen.dart';
 import '../model/post_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -49,12 +50,22 @@ class _HomeScreenState extends State<HomeScreen>
           ],
         ),
         actions: <Widget>[
-          Icon(Icons.search),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 9.0)),
-          Icon(Icons.more_vert),
-          Padding(
+          IconButton(
+            padding: EdgeInsets.symmetric(horizontal: 9.0),
+            icon: Icon(Icons.search),
+            tooltip: 'Search',
+            onPressed: () {
+              print("Search");
+            },
+          ),
+          IconButton(
             padding: EdgeInsets.only(right: 9.0),
-          )
+            icon: Icon(Icons.more_vert),
+            tooltip: 'More',
+            onPressed: () {
+              print('More');
+            },
+          ),
         ],
       ),
       body: TabBarView(

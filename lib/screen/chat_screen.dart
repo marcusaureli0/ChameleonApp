@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../model/chat_model.dart';
 import '../services/chat_service.dart';
 import '../util/time_util.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -13,24 +13,10 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   List<ChatModel> _chats;
 
-  void printTextFromServer(int index) {
-    String url = 'https://www.dartlang.org/f/dailyNewsDigest.txt';
-    http.post(url).then((response) {
-      print(
-          'status code: ${response.statusCode}, body: ${response.body}, index: $index');
-    });
-
-    print('index: $index');
-  }
-
   @override
   void initState() {
     super.initState();
     _chats = ChatService.getChats();
-
-    for (int i = 0; i < 2; i++) {
-      printTextFromServer(i);
-    }
   }
 
   @override
@@ -42,6 +28,9 @@ class _ChatScreenState extends State<ChatScreen> {
               children: <Widget>[
                 Padding(padding: EdgeInsets.only(top: 2.0)),
                 ListTile(
+                  onTap: () {
+                    print(_chats[index].userName);
+                  },
                   leading: CircleAvatar(
                     radius: 28.0,
                     backgroundColor: Colors.blue[200],

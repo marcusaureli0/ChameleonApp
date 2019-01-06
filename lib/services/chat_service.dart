@@ -1,12 +1,10 @@
 import '../model/chat_model.dart';
 import '../model/message_model.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
 
 class ChatService {
   static List<ChatModel> _chatList = [];
 
-  static List<dynamic> _names = [
+  static List<dynamic> names = [
     'Delores Escobar',
     'Riyad Keith',
     'Emmy Smith',
@@ -49,19 +47,11 @@ class ChatService {
     'Hallie Hodges',
   ];
 
-  static Future<http.Response> getMessageFromUrl() {
-    return http.get('https://whatthecommit.com/');
-  }
-
   static List<ChatModel> getChats() {
     if (_chatList.isEmpty) {
-      for (int i = 0; i < _names.length; i++) {
-        getMessageFromUrl().then((response) {
-          print(
-              'response contentLegth: ${response.contentLength}, headers: ${response.headers}');
-        });
+      for (int i = 0; i < names.length; i++) {
         _chatList.add(ChatModel(
-            userName: _names[i],
+            userName: names[i],
             userId: 'userId $i',
             avatarUrl: 'https://placeimg.com/640/480/selfie/$i',
             lastMessage: 'last message $i. hello world!',
