@@ -16,10 +16,16 @@ class StatusScreen extends StatefulWidget {
 
 class _StatusScreenState extends State<StatusScreen> {
   List<BuddyModel> _status;
+  BuddyModel mySelf;
 
   @override
   void initState() {
     _status = StatusService.getAvailableStatus();
+    mySelf = BuddyModel(
+        'My Status',
+        'Tap to add status update',
+        'https://vignette.wikia.nocookie.net/clubpenguin/images/f/f3/Troll.png/revision/latest?cb=20121222001812',
+        1);
     super.initState();
   }
 
@@ -27,26 +33,7 @@ class _StatusScreenState extends State<StatusScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ListTile(
-          onTap: () {},
-          leading: CircleAvatar(
-              radius: 24.0,
-              backgroundColor: Colors.blue[200],
-              foregroundColor: Theme.of(context).primaryColor,
-              backgroundImage: NetworkImage(
-                  'https://vignette.wikia.nocookie.net/clubpenguin/images/f/f3/Troll.png/revision/latest?cb=20121222001812'),
-              child: Text('M', style: TextStyle(color: Colors.white))),
-          title:
-              Text('My Status', style: TextStyle(fontWeight: FontWeight.bold)),
-          subtitle: Container(
-            padding: EdgeInsets.only(top: 5.0),
-            child: Text('Tap to add status update',
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.normal)),
-          ),
-        ),
+        CustomWidgets.getBuddyStatusChild(mySelf, photoRadius: 24.0),
         Row(
           children: <Widget>[
             Expanded(
@@ -64,7 +51,7 @@ class _StatusScreenState extends State<StatusScreen> {
           child: ListView.builder(
             itemCount: _status.length,
             itemBuilder: (context, index) =>
-                CustomWidgets.getBuddyStatusChild(_status[index]),
+                CustomWidgets.getBuddyStatusChild(_status[index], isEnd: index == _status.length - 1),
           ),
         ),
       ],
