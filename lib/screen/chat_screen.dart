@@ -43,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       Text(_chats[index].userName,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       Text(
-                        TimeUtil.getChatTime(_chats[index].timestamp),
+                        TimeUtil.getChatTime(_chats[index].timestamp, false),
                         style: TextStyle(color: Colors.black54, fontSize: 12.0),
                       )
                     ],

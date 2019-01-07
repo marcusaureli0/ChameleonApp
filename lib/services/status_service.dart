@@ -1,5 +1,6 @@
 import '../model/buddy_model.dart';
-import 'chat_service.dart';
+import '../model/app_data.dart';
+import '../util/time_util.dart';
 
 class StatusService {
   static List<BuddyModel> _status = [];
@@ -11,16 +12,10 @@ class StatusService {
     return _status;
   }
 
-  static String _getStatusTime(DateTime time) {
-    DateTime now = DateTime.now();
-    String result =  now.day == time.day? "Today" : "Yesterday";
-    return result + " ${time.hour}:${time.minute}";
-  }
-
   static void _updateStatus() {
     for (int i = 0; i < 4; i++) {
-      var b = BuddyModel(ChatService.names[i], _getStatusTime(DateTime.now()),
-          'https://placeimg.com/640/480/selfie/$i', 1);
+      var b = BuddyModel(names[i], TimeUtil.getChatTime(DateTime.now().microsecondsSinceEpoch, true),
+          'https://placeimg.com/256/256/selfie/$i', 1);
 
       _status.add(b);
     }

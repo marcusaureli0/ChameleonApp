@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../model/buddy_model.dart';
+import '../model/call_log_model.dart';
 
 class CustomWidgets {
   static Widget getTextWidget(String message) {
@@ -10,6 +11,56 @@ class CustomWidgets {
         letterSpacing: 1.0,
       ),
     );
+  }
+
+  static Widget getCallLogChild(CallLogModel log,
+      {double photoRadius, bool isEnd}) {
+    return Column(children: <Widget>[
+      ListTile(
+        onTap: () {},
+        leading: CircleAvatar(
+            radius: photoRadius == null ? 28.0 : photoRadius,
+            backgroundImage: NetworkImage(log.photoUrl),
+            backgroundColor: Colors.blue[200]),
+        trailing: IconButton(
+          onPressed: () {},
+          tooltip: log.callStream == CallStream.Call ? 'Call' : 'Video Call',
+          icon: log.callStream == CallStream.Call
+              ? Icon(Icons.call, color: Color(0xff075E54))
+              : Icon(Icons.videocam, color: Color(0xff075E54)),
+        ),
+        title: Text(log.name, style: TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Container(
+          padding: EdgeInsets.only(top: 5.0),
+          child: Row(
+            children: <Widget>[
+              Icon(
+                  log.callType == CallType.Outgoing
+                      ? Icons.call_made
+                      : Icons.call_received,
+                  color: log.callType == CallType.Outgoing
+                      ? Colors.green[400]
+                      : Colors.red[400],
+                  size: 18.0),
+              Text(log.description,
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.normal)),
+            ],
+          ),
+        ),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 84.0),
+        child: Divider(
+          height: 1.0,
+          color: isEnd == null
+              ? Colors.grey[300]
+              : isEnd ? Colors.transparent : Colors.grey[300],
+        ),
+      )
+    ]);
   }
 
   static Widget getBuddyStatusChild(BuddyModel buddy,
