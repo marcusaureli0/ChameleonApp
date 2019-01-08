@@ -7,6 +7,7 @@ import '../model/post_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import '../model/popup_item_model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -26,6 +27,10 @@ class _HomeScreenState extends State<HomeScreen>
       throw Exception('Failed to load post');
     }
   }
+
+void _handlePopupOption(PopupItemModel item) {
+    print('selected option: ${item.name}');
+}
 
   @override
   void initState() {
@@ -58,12 +63,22 @@ class _HomeScreenState extends State<HomeScreen>
               print("Search");
             },
           ),
-          IconButton(
+          PopupMenuButton(
             padding: EdgeInsets.only(right: 9.0),
-            icon: Icon(Icons.more_vert),
             tooltip: 'More',
-            onPressed: () {
-              print('More');
+            icon: Icon(Icons.more_vert),
+            onSelected: _handlePopupOption,
+            itemBuilder: (BuildContext context) {
+              return moreOptions.map((PopupItemModel item) {
+                return PopupMenuItem(
+                  value: item,
+                  child: ListTile(
+                      leading: Icon(item.icon, color: Colors.grey[600]),
+                      title: Text(item.name,
+                          style: TextStyle(
+                              color: Colors.black87, fontSize: 14.0))),
+                );
+              }).toList();
             },
           ),
         ],
