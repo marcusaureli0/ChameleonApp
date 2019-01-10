@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import '../model/buddy_model.dart';
 import '../model/call_log_model.dart';
 
-class CustomWidgets {
-  static Widget getTextWidget(String message) {
+class WidgetController {
+  static final WidgetController _instance = WidgetController._internal();
+
+  factory WidgetController() {
+    return _instance;
+  }
+
+  Widget getTextWidget(String message) {
     return Text(
       message,
       style: TextStyle(
@@ -13,8 +19,7 @@ class CustomWidgets {
     );
   }
 
-  static Widget getCallLogChild(CallLogModel log,
-      {double photoRadius, bool isEnd}) {
+  Widget getCallLogChild(CallLogModel log, {double photoRadius, bool isEnd}) {
     return Column(children: <Widget>[
       ListTile(
         onTap: () {},
@@ -63,7 +68,7 @@ class CustomWidgets {
     ]);
   }
 
-  static Widget getBuddyStatusChild(BuddyModel buddy,
+  Widget getBuddyStatusChild(BuddyModel buddy,
       {double photoRadius, bool isEnd}) {
     return Column(children: <Widget>[
       ListTile(
@@ -93,4 +98,6 @@ class CustomWidgets {
       )
     ]);
   }
+
+  WidgetController._internal();
 }

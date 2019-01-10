@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../util/custom_wigets.dart';
+import '../controller/widget_controller.dart';
 import '../model/call_log_model.dart';
 import '../services/call_service.dart';
 
@@ -22,7 +22,7 @@ class _CallsScreenState extends State<CallsScreen> {
     return ListView.builder(
       itemCount: _logs.length,
       itemBuilder: (context, index) =>
-          CustomWidgets.getCallLogChild(_logs[index], isEnd: index == _logs.length - 1),
+          WidgetController().getCallLogChild(_logs[index], isEnd: index == _logs.length - 1),
     );
   }
 }

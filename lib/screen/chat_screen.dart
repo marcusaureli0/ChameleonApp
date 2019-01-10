@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../model/chat_model.dart';
 import '../services/chat_service.dart';
 import '../util/time_util.dart';
-//import 'package:http/http.dart' as http;
 
 class ChatScreen extends StatefulWidget {
   @override

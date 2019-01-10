@@ -4,10 +4,12 @@ import './chat_screen.dart';
 import './status_screen.dart';
 import './picture_screen.dart';
 import '../model/post_model.dart';
+import '../controller/popup_controller.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import '../model/popup_item_model.dart';
+import '../screen/settings_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -28,9 +30,16 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
-void _handlePopupOption(PopupItemModel item) {
-    print('selected option: ${item.name}');
-}
+  void _handlePopupOption(PopupType type) {
+    switch (type) {
+      case PopupType.Settings:
+        Navigator.push(context,
+            CupertinoPageRoute(builder: (context) => SettingsScreen()));
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -69,9 +78,9 @@ void _handlePopupOption(PopupItemModel item) {
             icon: Icon(Icons.more_vert),
             onSelected: _handlePopupOption,
             itemBuilder: (BuildContext context) {
-              return moreOptions.map((PopupItemModel item) {
+              return PopupController().getHomePopupList().map((item) {
                 return PopupMenuItem(
-                  value: item,
+                  value: item.type,
                   child: ListTile(
                       leading: Icon(item.icon, color: Colors.grey[600]),
                       title: Text(item.name,

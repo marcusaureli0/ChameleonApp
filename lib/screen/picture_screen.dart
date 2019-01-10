@@ -1,5 +1,5 @@
+import 'package:chameleonapp/controller/widget_controller.dart';
 import 'package:flutter/material.dart';
-import '../util/custom_wigets.dart';
 //import 'package:image_picker/image_picker.dart';
 //import 'dart:async';
 
@@ -33,7 +33,7 @@ class _PictureScreenState extends State<PictureScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: CustomWidgets.getTextWidget('PictureScreen'),
+        child: WidgetController().getTextWidget('PictureScreen'),
       ),
     );
   }

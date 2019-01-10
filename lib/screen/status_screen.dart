@@ -1,6 +1,6 @@
+import 'package:chameleonapp/controller/widget_controller.dart';
 import 'package:flutter/material.dart';
 import '../model/post_model.dart';
-import '../util/custom_wigets.dart';
 import '../services/status_service.dart';
 import '../model/buddy_model.dart';
 import 'dart:async';
@@ -33,7 +33,7 @@ class _StatusScreenState extends State<StatusScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        CustomWidgets.getBuddyStatusChild(mySelf, photoRadius: 24.0),
+        WidgetController().getBuddyStatusChild(mySelf, photoRadius: 24.0),
         Row(
           children: <Widget>[
             Expanded(
@@ -50,8 +50,9 @@ class _StatusScreenState extends State<StatusScreen> {
         Expanded(
           child: ListView.builder(
             itemCount: _status.length,
-            itemBuilder: (context, index) =>
-                CustomWidgets.getBuddyStatusChild(_status[index], isEnd: index == _status.length - 1),
+            itemBuilder: (context, index) => WidgetController()
+                .getBuddyStatusChild(_status[index],
+                    isEnd: index == _status.length - 1),
           ),
         ),
       ],

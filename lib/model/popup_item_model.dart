@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
+import '../controller/popup_controller.dart' show PopupType;
 
 class PopupItemModel {
   String name;
   IconData icon;
+  PopupType type;
 
-  PopupItemModel(this.name, this.icon);
+  PopupItemModel(this.name, this.icon, this.type);
 }
-
-List<PopupItemModel> moreOptions = [
-               PopupItemModel('New group', Icons.group),
-                PopupItemModel('New transmission', Icons.call),
-                PopupItemModel('Whatsapp Web', Icons.web),
-                PopupItemModel('Favorite messages', Icons.favorite),
-                PopupItemModel('Settings', Icons.settings)
-              ];
