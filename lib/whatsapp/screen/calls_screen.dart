@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../controller/widget_controller.dart';
-import '../model/call_log_model.dart';
-import '../services/call_service.dart';
+import 'package:chameleonapp/whatsapp/controller/widget_controller.dart';
+import 'package:chameleonapp/whatsapp/model/call_log_model.dart';
+import 'package:chameleonapp/whatsapp/services/call_service.dart';
 
 class CallsScreen extends StatefulWidget {
   @override

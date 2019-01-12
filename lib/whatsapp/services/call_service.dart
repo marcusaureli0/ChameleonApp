@@ -1,6 +1,6 @@
-import '../model/call_log_model.dart';
-import '../model/app_data.dart';
-import '../util/time_util.dart';
+import 'package:chameleonapp/whatsapp/model/call_log_model.dart';
+import 'package:chameleonapp/whatsapp/model/app_data.dart';
+import 'package:chameleonapp/util/time_util.dart';
 
 class CallService {
   static List<CallLogModel> _callLog = [];

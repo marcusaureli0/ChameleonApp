@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/popup_item_model.dart';
+import 'package:chameleonapp/whatsapp/model/popup_item_model.dart';
 
 class PopupController {
   static final PopupController _instance = PopupController._internal();

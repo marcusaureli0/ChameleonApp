@@ -1,6 +1,6 @@
-import '../model/chat_model.dart';
-import '../model/message_model.dart';
-import '../model/app_data.dart';
+import 'package:chameleonapp/whatsapp/model/chat_model.dart';
+import 'package:chameleonapp/whatsapp/model//message_model.dart';
+import 'package:chameleonapp/whatsapp/model/app_data.dart';
 
 class ChatService {
   static List<ChatModel> _chatList = [];

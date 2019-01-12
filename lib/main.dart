@@ -1,6 +1,6 @@
+import 'package:chameleonapp/whatsapp/screen/whatsapp_home_screen.dart';
 import 'package:flutter/material.dart';
-import './screen/home_screen.dart';
-import 'screen/settings_screen.dart';
+import 'package:chameleonapp/whatsapp/screen/settings_screen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff075E54),
         accentColor: Color(0xff25D366),
       ),
-      home: new HomeScreen(),
+      home: new WhatsappHomeScreen(),
     );
   }
 }

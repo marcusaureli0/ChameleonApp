@@ -1,8 +1,8 @@
-import 'package:chameleonapp/controller/widget_controller.dart';
+import 'package:chameleonapp/whatsapp/controller/widget_controller.dart';
 import 'package:flutter/material.dart';
-import '../model/post_model.dart';
-import '../services/status_service.dart';
-import '../model/buddy_model.dart';
+import 'package:chameleonapp/whatsapp/model/post_model.dart';
+import 'package:chameleonapp/whatsapp/services/status_service.dart';
+import 'package:chameleonapp/whatsapp/model/buddy_model.dart';
 import 'dart:async';
 
 class StatusScreen extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../model/chat_model.dart';
-import '../services/chat_service.dart';
-import '../util/time_util.dart';
+import 'package:chameleonapp/whatsapp/model/chat_model.dart';
+import 'package:chameleonapp/whatsapp/services/chat_service.dart';
+import 'package:chameleonapp/util/time_util.dart';
 
 class ChatScreen extends StatefulWidget {
   @override

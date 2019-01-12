@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../model/buddy_model.dart';
-import '../model/call_log_model.dart';
+import 'package:chameleonapp/whatsapp/model/buddy_model.dart';
+import 'package:chameleonapp/whatsapp/model/call_log_model.dart';
 
 class WidgetController {
   static final WidgetController _instance = WidgetController._internal();

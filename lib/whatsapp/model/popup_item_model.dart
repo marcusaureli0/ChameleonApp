@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../controller/popup_controller.dart' show PopupType;
+import 'package:chameleonapp/whatsapp/controller/popup_controller.dart' show PopupType;
 
 class PopupItemModel {
   String name;

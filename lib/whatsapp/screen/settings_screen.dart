@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../controller/widget_controller.dart';
-import '../model/buddy_model.dart';
-import '../controller/settings_controller.dart';
+import 'package:chameleonapp/whatsapp/controller/widget_controller.dart';
+import 'package:chameleonapp/whatsapp/model/buddy_model.dart';
+import 'package:chameleonapp/whatsapp/controller/settings_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   final BuddyModel buddy = BuddyModel(

@@ -3,20 +3,20 @@ import './calls_screen.dart';
 import './chat_screen.dart';
 import './status_screen.dart';
 import './picture_screen.dart';
-import '../model/post_model.dart';
-import '../controller/popup_controller.dart';
+import 'package:chameleonapp/whatsapp/model/post_model.dart';
+import 'package:chameleonapp/whatsapp/controller/popup_controller.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import '../screen/settings_screen.dart';
+import 'package:chameleonapp/whatsapp/screen/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 
-class HomeScreen extends StatefulWidget {
+class WhatsappHomeScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _ScreenState createState() => _ScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _ScreenState extends State<WhatsappHomeScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   Future<Post> fetchPost() async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/settings_item_model.dart';
+import 'package:chameleonapp/whatsapp/model/settings_item_model.dart';
 
 class SettingsController {
   static final SettingsController _instance = SettingsController._internal();
