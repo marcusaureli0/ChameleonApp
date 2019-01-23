@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:chameleonapp/under_development_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chameleonapp/whatsapp/screen/whatsapp_home_screen.dart';
@@ -138,16 +139,16 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget screen;
     switch (appType) {
       case AppType.Instagram:
-        screen = null;
+        screen = UnderDevelopmentScreen();
         break;
       case AppType.Whatsapp:
         screen = WhatsappHomeScreen();
         break;
       case AppType.Netflix:
-        screen = null;
+        screen = UnderDevelopmentScreen();
         break;
       default:
-        screen = null;
+        screen = UnderDevelopmentScreen();
     }
     screen != null
         ? Navigator.push(
