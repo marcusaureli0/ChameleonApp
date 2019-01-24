@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:chameleonapp/instagram/screen/home_screen.dart';
 import 'package:chameleonapp/under_development_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget screen;
     switch (appType) {
       case AppType.Instagram:
-        screen = UnderDevelopmentScreen();
+        screen = InstagramHomeScreen();
         break;
       case AppType.Whatsapp:
         screen = WhatsappHomeScreen();
