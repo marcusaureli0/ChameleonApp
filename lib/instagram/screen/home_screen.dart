@@ -1,3 +1,8 @@
+import 'package:chameleonapp/instagram/screen/activity_history.dart';
+import 'package:chameleonapp/instagram/screen/friends_feed.dart';
+import 'package:chameleonapp/instagram/screen/gallery.dart';
+import 'package:chameleonapp/instagram/screen/person_page.dart';
+import 'package:chameleonapp/instagram/screen/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
@@ -8,8 +13,7 @@ class InstagramHomeScreen extends StatefulWidget {
 }
 
 class _InstagramHomeScreenState extends State<InstagramHomeScreen> {
-  static var count = 1;
-  var dummyText = "Instagram Home Screen $count";
+  var _currentTab = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +33,32 @@ class _InstagramHomeScreenState extends State<InstagramHomeScreen> {
           actions: _getHomeActions()),
       body: RefreshIndicator(
         onRefresh: _refresh,
-        child: ListView(
-          children: <Widget>[
-            Text(dummyText),
-            Text(dummyText),
-            Text(dummyText),
-            Text(dummyText)
-          ],
-        ),
+        child: /*ListView(
+          children: <Widget>[*/
+            _mTabs[_currentTab],
+        //  ],
+        // ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        onTap: _onTabTapped,
+        currentIndex: _currentTab,
         type: BottomNavigationBarType.fixed,
         items: _getBottomNavigationBarItems(),
       ),
     );
+  }
+
+  List<Widget> _mTabs = [
+    ActivityHistoryScreen(),
+    FriendsFeedScreen(),
+    GalleryScreen(),
+    PersonPageScreen(),
+    SearchScreen(),
+  ];
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentTab = index;
+    });
   }
 
   List<Widget> _getHomeActions() {
@@ -87,8 +102,7 @@ class _InstagramHomeScreenState extends State<InstagramHomeScreen> {
   Future<void> _refresh() async {
     await Future.delayed(Duration(seconds: 2), () {
       setState(() {
-        count++;
-        dummyText = "Instagram Home Screen $count";
+        // handle update
       });
     });
 
