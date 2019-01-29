@@ -7,6 +7,7 @@ class UnderDevelopmentScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Under Development', style: TextStyle(color: Colors.white)),
         backgroundColor: Theme.of(context).primaryColor,
+        centerTitle: false,
       ),
       body: Container(
         child: Center(

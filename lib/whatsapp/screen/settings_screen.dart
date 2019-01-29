@@ -36,6 +36,7 @@ class SettingsScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Settings', style: TextStyle(color: Colors.white)),
           elevation: 1.0,
+          centerTitle: false,
         ),
         body: SingleChildScrollView(child: getSettingsList()));
   }

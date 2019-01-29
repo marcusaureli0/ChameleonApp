@@ -1,9 +1,11 @@
 import 'dart:math' as math;
+import 'package:chameleonapp/assets_controller.dart';
 import 'package:chameleonapp/instagram/screen/home_screen.dart';
+import 'package:chameleonapp/netflix/screen/home_screen.dart';
 import 'package:chameleonapp/under_development_screen.dart';
+import 'package:chameleonapp/whatsapp/screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chameleonapp/whatsapp/screen/whatsapp_home_screen.dart';
 import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
@@ -14,13 +16,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<AppData> items;
   Color _bodyColor;
-  int _animationDur; // in ms
   PageController _pageController;
 
   @override
   void initState() {
     _bodyColor = Colors.white; //_getRandomColor();
-    _animationDur = 3;
     _pageController =
         PageController(viewportFraction: 0.5, initialPage: 1, keepPage: false);
     items = [
@@ -43,25 +43,40 @@ class _HomeScreenState extends State<HomeScreen> {
 
     super.initState();
 
-    // _updateState();
+    _updateState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('ChamaleonApp'),
-      ),
-      body: AnimatedContainer(
-        duration: Duration(seconds: _animationDur),
-        color: _bodyColor,
-        curve: Curves.easeIn,
-        child: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (BuildContext context, i) {
-              return _buildCarousel(context, items);
-            }),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              backgroundColor: _bodyColor,
+              floating: true,
+              pinned: true,
+              titleSpacing: 3.0,
+              expandedHeight: 280.0,
+              elevation: 1.0,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Text('ChameleonApp'),
+                collapseMode: CollapseMode.parallax,
+                background: Image.asset(
+                  AssetsController().getImageDirectory(AssetsType.Chameleon),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          ];
+        },
+        body: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (BuildContext context, i) {
+            return _buildCarousel(context, items);
+          },
+        ),
       ),
     );
   }
@@ -70,12 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
-          child: Text('Choose one App',
-              style: TextStyle(
-                  color: Colors.black87, fontWeight: FontWeight.w500)),
-        ),
         SizedBox(
           // you may want to use an aspect ratio here for tablet support
           height: 230.0,
@@ -98,25 +107,23 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         _openScreen(item.appType);
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Padding(padding: EdgeInsets.only(top: 12.0)),
-              Image(image: NetworkImage(item.imageUrl), height: 150.0),
-              Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-              Text(item.name, style: TextStyle(color: Colors.black87)),
-              Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-              Text('open ${item.name} app',
-                  style: TextStyle(color: Colors.black54))
-            ],
-          ),
+      child: Card(
+        color: Colors.lime[50],
+        elevation: 3.0,
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(padding: EdgeInsets.only(top: 12.0)),
+            Image(image: NetworkImage(item.imageUrl), height: 150.0),
+            Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+            Text(item.name,
+                style: TextStyle(
+                    color: Colors.black87, fontWeight: FontWeight.w400)),
+            Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+            Text('open ${item.name} app',
+                style: TextStyle(color: Colors.black54))
+          ],
         ),
       ),
     );
@@ -146,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
         screen = WhatsappHomeScreen();
         break;
       case AppType.Netflix:
-        screen = UnderDevelopmentScreen();
+        screen = NetflixHomeScreen();
         break;
       default:
         screen = UnderDevelopmentScreen();
