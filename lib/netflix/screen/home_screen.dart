@@ -30,7 +30,7 @@ List<PopupMenuItem> _getPopupItems() {
 }
 
 class _NetflixHomeScreenState extends State<NetflixHomeScreen> {
-  var currentPage = 0;
+  var _currentPage = 0;
 
   Widget _getAppBar() {
     return Positioned(
@@ -78,52 +78,50 @@ class _NetflixHomeScreenState extends State<NetflixHomeScreen> {
   }
 
   BottomNavigationBar _getBottomBar() {
-    return /*Positioned(
-      bottom: 0.0,
-      right: 0.0,
-      left: 0.0,
-      child: */
-        BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      //fixedColor: Color.fromRGBO(28, 36, 41, 0.8),
+    return BottomNavigationBar(
+      onTap: _onTabTapped,
+      currentIndex: _currentPage,
+      type: BottomNavigationBarType.shifting,
       items: _getBottomNavigationBarItems(),
-      //),
     );
+  }
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentPage = index;
+    });
   }
 
   List<BottomNavigationBarItem> _getBottomNavigationBarItems() {
     List<OptionsModel> barItems = [];
     barItems.add(OptionsModel(title: 'Início', icon: Icons.home));
-    barItems.add(OptionsModel(title: 'Buscar', icon: Icons.home));
-    barItems.add(OptionsModel(title: 'Em breve', icon: Icons.home));
-    barItems.add(OptionsModel(title: 'Downloads', icon: Icons.home));
-    barItems.add(OptionsModel(title: 'Mais', icon: Icons.home));
+    barItems.add(OptionsModel(title: 'Buscar', icon: Icons.search));
+    barItems.add(OptionsModel(title: 'Em breve', icon: Icons.ondemand_video));
+    barItems.add(OptionsModel(title: 'Downloads', icon: Icons.file_download));
+    barItems.add(OptionsModel(title: 'Mais', icon: Icons.list));
 
     return List<BottomNavigationBarItem>.generate(
         barItems.length,
         (index) => new BottomNavigationBarItem(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.black87,
             icon: Icon(
               barItems[index].icon,
-              color: index == currentPage ? Colors.white : Colors.grey[100],
+              color: index == _currentPage ? Colors.white : Colors.grey[50],
               size: 18.0,
             ),
             title: Text(barItems[index].title,
                 style: TextStyle(
-                    fontSize: 13,
-                    color: index == currentPage
+                    fontSize: 12,
+                    color: index == _currentPage
                         ? Colors.white
-                        : Colors.grey[100]))));
+                        : Colors.grey[50]))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      bottomNavigationBar: Material(
-        color: Colors.red,
-        child: _getBottomBar(),
-      ),
+      backgroundColor: Colors.grey[800],
+      bottomNavigationBar: _getBottomBar(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return <Widget>[
@@ -133,27 +131,14 @@ class _NetflixHomeScreenState extends State<NetflixHomeScreen> {
                 width: 20.0,
                 height: 20.0,
               ),
-              backgroundColor: Color.fromRGBO(0, 0, 0, 0.75),
-              //expandedHeight: 200.0,
+              backgroundColor: Color.fromRGBO(0, 0, 0, 0.87),
               floating: false,
               pinned: false,
-              /*flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text(
-                      '',
-                      style:
-                          TextStyle(color: Colors.red[600], letterSpacing: 4.0),
-                    ),
-                    background: Image.network(
-                        'https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350',
-                        fit: BoxFit.cover),
-                  ),*/
             ),
           ];
         },
         body: Stack(
           children: <Widget>[
-            //_getAppBar(),
             Center(
               child: Text(
                 'Netflix',
@@ -169,23 +154,5 @@ class _NetflixHomeScreenState extends State<NetflixHomeScreen> {
         ),
       ),
     );
-
-    /*Stack(
-      children: <Widget>[
-        _getAppBar(),
-        Center(
-          child: Text(
-            'Netflix',
-            style: new TextStyle(
-                fontSize: 20.0,
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
-                fontFamily: 'Anton',
-                letterSpacing: 3.0),
-          ),
-        ),
-        _getBottomBar(),
-      ],
-    );*/
   }
 }
