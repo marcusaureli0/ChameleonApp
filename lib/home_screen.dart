@@ -13,14 +13,17 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   List<AppData> items;
   Color _bodyColor;
   PageController _pageController;
+  bool _waitingScreen;
 
   @override
   void initState() {
-    _bodyColor = Colors.white; //_getRandomColor();
+    _bodyColor = _getRandomColor();
+    _waitingScreen = false;
     _pageController =
         PageController(viewportFraction: 0.5, initialPage: 1, keepPage: false);
     items = [
@@ -42,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     super.initState();
-
     _updateState();
   }
 
@@ -71,11 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ];
         },
-        body: ListView.builder(
-          itemCount: 1,
-          itemBuilder: (BuildContext context, i) {
-            return _buildCarousel(context, items);
-          },
+        body: SafeArea(
+          child: _buildCarousel(context, items),
         ),
       ),
     );
@@ -86,10 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          // you may want to use an aspect ratio here for tablet support
           height: 230.0,
           child: PageView.builder(
-            // store this controller in a State to save the carousel scroll position
             controller: _pageController,
             pageSnapping: true,
             itemCount: items.length,
@@ -103,27 +100,42 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCarouselItem(AppData item) {
-    return GestureDetector(
-      onTap: () {
-        _openScreen(item.appType);
-      },
-      child: Card(
-        color: Colors.lime[50],
-        elevation: 3.0,
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(padding: EdgeInsets.only(top: 12.0)),
-            Image(image: NetworkImage(item.imageUrl), height: 150.0),
-            Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-            Text(item.name,
-                style: TextStyle(
-                    color: Colors.black87, fontWeight: FontWeight.w400)),
-            Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-            Text('open ${item.name} app',
-                style: TextStyle(color: Colors.black54))
-          ],
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: InkWell(
+          onTap: () {
+            _openScreen(item.appType);
+          },
+          splashColor: Colors.blueAccent[50],
+          highlightColor: Colors.teal.withOpacity(0.1),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  blurRadius: 20.0,
+                  color: Colors.black12,
+                )
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(padding: EdgeInsets.only(top: 12.0)),
+                Image(image: NetworkImage(item.imageUrl), height: 150.0),
+                Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+                Text(item.name,
+                    style: TextStyle(
+                        color: Colors.black87, fontWeight: FontWeight.w400)),
+                Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+                Text('open ${item.name} app',
+                    style: TextStyle(color: Colors.black54))
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -139,30 +151,48 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _bodyColor = _getRandomColor();
     });
-
     _updateState();
   }
 
-  void _openScreen(AppType appType) {
-    Widget screen;
-    switch (appType) {
-      case AppType.Instagram:
-        screen = InstagramHomeScreen();
-        break;
-      case AppType.Whatsapp:
-        screen = WhatsappHomeScreen();
-        break;
-      case AppType.Netflix:
-        screen = NetflixHomeScreen();
-        break;
-      default:
-        screen = UnderDevelopmentScreen();
+  Future<void> _openScreen(AppType appType) async {
+    if (!_waitingScreen) {
+      _waitingScreen = true;
+      await Future.delayed(Duration(milliseconds: 100)).then((result) {
+        Widget screen;
+        switch (appType) {
+          case AppType.Instagram:
+            screen = InstagramHomeScreen();
+            break;
+          case AppType.Whatsapp:
+            screen = WhatsappHomeScreen();
+            break;
+          case AppType.Netflix:
+            screen = NetflixHomeScreen();
+            break;
+          default:
+            screen = UnderDevelopmentScreen();
+        }
+        screen != null
+            ? Navigator.push(
+                context, CupertinoPageRoute(builder: (context) => screen))
+            : Scaffold.of(context)
+                .showSnackBar(SnackBar(content: new Text('Under Development')));
+      });
+      _waitingScreen = false;
     }
-    screen != null
-        ? Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => screen))
-        : Scaffold.of(context)
-            .showSnackBar(SnackBar(content: new Text('Under Development')));
+  }
+
+  @override
+  void dispose() {
+    _pageController?.dispose();
+    super.dispose();
+  }
+}
+
+class AnimatedItem extends AnimatedWidget {
+  @override
+  Widget build(BuildContext context) {
+    return null;
   }
 }
 

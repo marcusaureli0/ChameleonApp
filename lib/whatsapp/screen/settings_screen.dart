@@ -41,14 +41,3 @@ class SettingsScreen extends StatelessWidget {
         body: SingleChildScrollView(child: getSettingsList()));
   }
 }
-/*
-Foto Marcus Aurelio
-     desc...
-
-Conta
-Conversas
-Notificações
-Dados e armazenamento
-Convidar um amigo
-Ajuda      
-*/

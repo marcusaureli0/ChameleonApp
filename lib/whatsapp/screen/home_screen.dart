@@ -51,6 +51,7 @@ class _ScreenState extends State<WhatsappHomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('WhatsApp', style: TextStyle(color: Colors.white)),
         elevation: 1.0,
         bottom: TabBar(
