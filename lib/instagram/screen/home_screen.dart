@@ -89,10 +89,7 @@ class _InstagramHomeScreenState extends State<InstagramHomeScreen> {
             ),
             icon: Icon(icons[index], color: Colors.black54, size: 30.0),
             backgroundColor: Colors.grey[100],
-            title: Text(
-              '',
-              style: TextStyle(fontSize: 0.0),
-            ),
+            label:'',
           ),
     );
   }

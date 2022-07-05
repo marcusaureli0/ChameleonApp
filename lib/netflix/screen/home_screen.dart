@@ -109,12 +109,7 @@ class _NetflixHomeScreenState extends State<NetflixHomeScreen> {
               color: index == _currentPage ? Colors.white : Colors.grey[50],
               size: 18.0,
             ),
-            title: Text(barItems[index].title,
-                style: TextStyle(
-                    fontSize: 12,
-                    color: index == _currentPage
-                        ? Colors.white
-                        : Colors.grey[50]))));
+            label: barItems[index].title));
   }
 
   @override
