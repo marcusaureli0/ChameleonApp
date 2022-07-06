@@ -1,12 +1,11 @@
 # ChameleonApp
 
-> Em desenvolvimento.
+This is a simple example app built with flutter. 
 
-<div class="content">
-<img src="https://github.com/marcusaurelioo/ChameleonApp/blob/master/assets/img/print1.jpg" width="240" height="405" />
-</div>
+https://user-images.githubusercontent.com/12613642/177442497-26af34eb-117e-4a91-ad2c-1e4241ecd7e4.mov
 
-
-O Objetivo desse projeto é clonar o front-end dos aplicativos WhatsApp, Instagram e Netflix utilizando o framework Flutter.
-
-Execute o comando 'flutter packages get' para fazer o download das dependências do projeto. Mais informações oficiais sobre o Flutter podem ser encontradas no [github](https://github.com/flutter/flutter "Flutter github") e [website](https://flutter.io/ "Flutter website").
+To run it, use the commands below:
+- flutter upgrade
+- flutter pub get
+- flutter devices
+- flutter run -d device_id_here
