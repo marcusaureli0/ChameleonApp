@@ -45,8 +45,7 @@ flutter:
         - asset: fonts/Billabong.ttf
 
   assets:
-    - assets/img/ic_netflix.png
-    - assets/img/bg_home.webp
+    - assets/img/
     
   # To add assets to your application, add an assets section, like this:
   # assets:
