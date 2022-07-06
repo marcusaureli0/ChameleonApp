@@ -11,7 +11,7 @@ class AssetsController {
         return 'assets/img/ic_netflix.png';
         break;
       case AssetsType.Chameleon:
-        return 'assets/img/chameleon1.webp';
+        return 'assets/img/bg_home.webp';
         break;
     }
   }

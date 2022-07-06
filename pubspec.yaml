@@ -46,7 +46,7 @@ flutter:
 
   assets:
     - assets/img/ic_netflix.png
-    - assets/img/chameleon1.webp
+    - assets/img/bg_home.webp
     
   # To add assets to your application, add an assets section, like this:
   # assets:

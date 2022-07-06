@@ -59,11 +59,11 @@ class _HomeScreenState extends State<HomeScreen>
               floating: true,
               pinned: true,
               titleSpacing: 3.0,
-              expandedHeight: 280.0,
+              expandedHeight: 220.0,
               elevation: 1.0,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: Text('ChameleonApp'),
+                title: Text('ChameleonApp', style: TextStyle(color:Colors.white.withOpacity(0.75)),),
                 collapseMode: CollapseMode.parallax,
                 background: Image.asset(
                   AssetsController().getImageDirectory(AssetsType.Chameleon),
@@ -85,13 +85,13 @@ class _HomeScreenState extends State<HomeScreen>
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          height: 230.0,
+          height: 155.0,
           child: PageView.builder(
             controller: _pageController,
             pageSnapping: true,
             itemCount: items.length,
             itemBuilder: (BuildContext context, int itemIndex) {
-              return _buildCarouselItem(items[itemIndex]);
+              return _setupEffect(items[itemIndex]);
             },
           ),
         )
@@ -99,46 +99,50 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildCarouselItem(AppData item) {
+  Widget _setupEffect(AppData item) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
         child: InkWell(
           onTap: () {
             _openScreen(item.appType);
           },
           splashColor: Colors.blueAccent[50],
           highlightColor: Colors.teal.withOpacity(0.1),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8.0),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  blurRadius: 20.0,
-                  color: Colors.black12,
-                )
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 12.0)),
-                Image(image: NetworkImage(item.imageUrl), height: 150.0),
-                Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-                Text(item.name,
-                    style: TextStyle(
-                        color: Colors.black87, fontWeight: FontWeight.w400)),
-                Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-                Text('open ${item.name} app',
-                    style: TextStyle(color: Colors.black54))
-              ],
-            ),
-          ),
+          child: _buildCarouselItem(item),
         ),
       ),
     );
+  }
+
+  Widget _buildCarouselItem(AppData item) {
+    return Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                blurRadius: 20.0,
+                color: Colors.black12,
+              )
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 12.0)),
+              Image(image: NetworkImage(item.imageUrl), height: 50.0),
+              Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+              Text(item.name,
+                  style: TextStyle(
+                      color: Colors.black87, fontWeight: FontWeight.w400)),
+              Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+              Text('open ${item.name} app',
+                  style: TextStyle(color: Colors.black54))
+            ],
+          ),
+        );
   }
 
   Color _getRandomColor() {
@@ -175,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen>
         screen != null
             ? Navigator.push(
                 context, CupertinoPageRoute(builder: (context) => screen))
-            : Scaffold.of(context)
+            : ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: new Text('Under Development')));
       });
       _waitingScreen = false;
